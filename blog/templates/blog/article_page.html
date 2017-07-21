@@ -1,13 +1,15 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet" href="{% static 'blog/css/highlights/github.css' %}">
     <title>Article Page</title>
 </head>
 <body>
 <h1>{{ article.title }}</h1>
 <br/>
-<h3>{{ article.content }}</h3>
+<h3>{{ article.content | safe }}</h3>
 <br/><br/>
 <a href="{% url 'blog:edit_page' article.id %}">修改文章</a>
 </body>

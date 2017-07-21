@@ -1,3 +1,4 @@
+import markdown
 from django.shortcuts import render, redirect
 
 from . import models
@@ -10,6 +11,12 @@ def index(request):
 
 def article_page(request, article_id):
     article = models.Article.objects.get(pk=article_id)
+    article.content = markdown.markdown(article.content,
+                                        extensions=[
+                                            'markdown.extensions.extra',
+                                            'markdown.extensions.codehilite',
+                                            'markdown.extensions.toc',
+                                        ])
     return render(request, 'blog/article_page.html', locals())
 
 
